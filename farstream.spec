@@ -8,7 +8,7 @@
 Summary:	An audio/video communications framework
 Name:		farstream
 Version:	0.1.2
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	LGPLv2+
 URL:		http://www.freedesktop.org/wiki/Software/Farstream
 Group:		Networking/Instant messaging
@@ -70,7 +70,7 @@ Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 # Added 04/2012 (wally)
-#Obsoletes:	%{_lib}farsight2-devel
+Obsoletes:	%{_lib}farsight2-devel
 
 %description -n %{develname}
 Headers of %{name} for development.
