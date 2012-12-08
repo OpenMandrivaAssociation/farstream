@@ -8,18 +8,20 @@
 Summary:	An audio/video communications framework
 Name:		farstream
 Version:	0.1.2
-Release:	%mkrel 3
+Release:	4
 License:	LGPLv2+
 URL:		http://www.freedesktop.org/wiki/Software/Farstream
 Group:		Networking/Instant messaging
 Source0:  	http://freedesktop.org/software/farstream/releases/%{name}/%{name}-%{version}.tar.gz
+# From upstream GIT:
+Patch0:         farstream-0.1.2-fix_gtk-doc_tags.patch
 BuildRequires:	pkgconfig(gstreamer-plugins-base-0.10) >= 0.10.33
 BuildRequires:	pkgconfig(nice) >= 0.1.0
 BuildRequires:	pkgconfig(gst-python-0.10) >= 0.10.10
 BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 # Added 04/2012 (wally)
-Obsoletes:	farsight2
+Obsoletes:	farsight2 < 0.0.30
 
 %description
 The Farstream (formerly Farsight) project is an effort to create a framework to
@@ -49,7 +51,7 @@ Requires:	gstreamer0.10-plugins-good
 Requires:	gstreamer0.10-nice >= 0.1.0
 Requires:	gstreamer0.10-voip
 # Added 04/2012 (wally)
-Obsoletes:	gstreamer0.10-farsight2
+Obsoletes:	gstreamer0.10-farsight2 < 0.0.30
 
 %description -n gstreamer0.10-%{name}
 This is a set of plugins for GStreamer that will be used by Farstream
@@ -59,7 +61,7 @@ for Audio/Video conferencing.
 Summary:	Python bindings for %{name}
 Group:		Development/Python
 # Added 04/2012 (wally)
-Obsoletes:	python-farsight2
+Obsoletes:	python-farsight2 < 0.0.30
 
 %description -n	python-%{name}
 Python bindings for %{name}.
@@ -70,7 +72,7 @@ Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 # Added 04/2012 (wally)
-Obsoletes:	%{_lib}farsight2-devel
+#Obsoletes:	%{_lib}farsight2-devel
 
 %description -n %{develname}
 Headers of %{name} for development.
@@ -85,13 +87,14 @@ GObject Introspection interface description for %{name}.
 
 %prep
 %setup -q
+%apply_patches
 
 %build
 %configure2_5x \
 	--disable-static \
 	--enable-gupnp \
 	--with-package-name="%{_vendor} %{name}" \
-	--with-package-origin="http://www.mandriva.com"
+	--with-package-origin="http://rosalinux.com"
 %make
 
 %install
@@ -125,3 +128,17 @@ find %{buildroot} -name '*.la' -delete
 
 %files -n %{girname}
 %{_libdir}/girepository-1.0/Farstream-%{girmajor}.typelib
+
+
+%changelog
+* Wed Oct 24 2012 Arkady L. Shane <ashejn@rosalab.ru> 0.1.2-4
+- add patch from upstream git to fix build
+
+* Wed May 02 2012 Alexander Khrukin <akhrukin@mandriva.org> 0.1.2-2mdv2012.0
++ Revision: 795207
+- rel bump
+
+* Wed May 02 2012 Alexander Khrukin <akhrukin@mandriva.org> 0.1.2-1
++ Revision: 795067
+- imported package farstream
+
