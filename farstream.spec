@@ -1,27 +1,24 @@
-%define api		0.1
-%define major		0
-%define girmajor	0.1
-%define libname		%mklibname %{name} %{api} %{major}
-%define develname	%mklibname -d %{name}
-%define girname		%mklibname %{name}-gir %{girmajor}
+%define gstapi	1.0
+%define major	2
+%define api	0.2
+%define libname	%mklibname %{name} %{api} %{major}
+%define girname	%mklibname %{name}-gir %{api}
+%define devname	%mklibname -d %{name}
 
 Summary:	An audio/video communications framework
 Name:		farstream
-Version:	0.1.2
-Release:	4
+Version:	0.2.2
+Release:	1
 License:	LGPLv2+
 URL:		http://www.freedesktop.org/wiki/Software/Farstream
 Group:		Networking/Instant messaging
 Source0:  	http://freedesktop.org/software/farstream/releases/%{name}/%{name}-%{version}.tar.gz
-# From upstream GIT:
-Patch0:         farstream-0.1.2-fix_gtk-doc_tags.patch
-BuildRequires:	pkgconfig(gstreamer-plugins-base-0.10) >= 0.10.33
-BuildRequires:	pkgconfig(nice) >= 0.1.0
-BuildRequires:	pkgconfig(gst-python-0.10) >= 0.10.10
-BuildRequires:	pkgconfig(python)
+Source1:  	http://freedesktop.org/software/farstream/releases/%{name}/%{name}-%{version}.tar.gz.asc
+
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
-# Added 04/2012 (wally)
-Obsoletes:	farsight2 < 0.0.30
+BuildRequires:	pkgconfig(gstreamer-%{gstapi})
+BuildRequires:	pkgconfig(gstreamer-plugins-base-%{gstapi})
+BuildRequires:	pkgconfig(nice)
 
 %description
 The Farstream (formerly Farsight) project is an effort to create a framework to
@@ -38,52 +35,38 @@ streaming and NAT traversal issues.
 Summary:	Farstream library
 Group:		System/Libraries
 Provides: 	%{name} = %{version}-%{release}
-Obsoletes:	%{_lib}farstream_0.1-0 < 0.1.1-2
 
 %description -n %{libname}
 Shared libraries for %{name}.
 
-%package -n	gstreamer0.10-%{name}
-Summary:	Set of plugins for GStreamer used Audio/Video conferencing
-Group:		Sound
-Requires:	%{libname} = %{version}-%{release}
-Requires:	gstreamer0.10-plugins-good
-Requires:	gstreamer0.10-nice >= 0.1.0
-Requires:	gstreamer0.10-voip
-# Added 04/2012 (wally)
-Obsoletes:	gstreamer0.10-farsight2 < 0.0.30
-
-%description -n gstreamer0.10-%{name}
-This is a set of plugins for GStreamer that will be used by Farstream
-for Audio/Video conferencing.
-
-%package -n   	python-%{name}
-Summary:	Python bindings for %{name}
-Group:		Development/Python
-# Added 04/2012 (wally)
-Obsoletes:	python-farsight2 < 0.0.30
-
-%description -n	python-%{name}
-Python bindings for %{name}.
-
-%package -n %{develname}
-Summary:	Headers of %name for development
-Group:		Development/C
-Requires:	%{libname} = %{version}-%{release}
-Provides:	%{name}-devel = %{version}-%{release}
-# Added 04/2012 (wally)
-#Obsoletes:	%{_lib}farsight2-devel
-
-%description -n %{develname}
-Headers of %{name} for development.
-
 %package -n %{girname}
 Summary:	GObject Introspection interface description for %{name}
 Group:		System/Libraries
-Requires:	%{libname} = %{version}-%{release}
 
 %description -n %{girname}
 GObject Introspection interface description for %{name}.
+
+%package -n	gstreamer%{gstapi}-%{name}
+Summary:	Set of plugins for GStreamer used Audio/Video conferencing
+Group:		Sound
+Requires:	%{libname} = %{version}-%{release}
+Requires:	gstreamer%{gstapi}-plugins-good
+Requires:	gstreamer%{gstapi}-nice >= 0.1.0
+Requires:	gstreamer%{gstapi}-voip
+
+%description -n gstreamer%{gstapi}-%{name}
+This is a set of plugins for GStreamer that will be used by Farstream
+for Audio/Video conferencing.
+
+%package -n %{devname}
+Summary:	Headers of %name for development
+Group:		Development/C
+Requires:	%{libname} = %{version}-%{release}
+Requires:	%{girname} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
+
+%description -n %{devname}
+Headers of %{name} for development.
 
 %prep
 %setup -q
@@ -94,7 +77,8 @@ GObject Introspection interface description for %{name}.
 	--disable-static \
 	--enable-gupnp \
 	--with-package-name="%{_vendor} %{name}" \
-	--with-package-origin="http://rosalinux.com"
+	--with-package-origin="http://openmandriva.org"
+
 %make
 
 %install
@@ -106,39 +90,21 @@ find %{buildroot} -name '*.la' -delete
 %{_libdir}/lib%{name}-%{api}.so.%{major}*
 %{_libdir}/%{name}-%{api}/*.so
 
-%files -n gstreamer0.10-%{name}
-%{_libdir}/gstreamer-0.10/*.so
+%files -n %{girname}
+%{_libdir}/girepository-1.0/Farstream-%{api}.typelib
+
+%files -n gstreamer%{gstapi}-%{name}
+%{_libdir}/gstreamer-%{gstapi}/*.so
 %{_datadir}/%{name}/%{api}/fsrtpconference/default-codec-preferences
 %{_datadir}/%{name}/%{api}/fsrtpconference/default-element-properties
 %{_datadir}/%{name}/%{api}/fsrawconference/default-element-properties
 
-
-%files -n python-%{name}
-%{python_sitearch}/%{name}.so
-
-%files -n %{develname}
+%files -n %{devname}
 %doc ChangeLog
-# Farstream build bug? (0.10 instead of 0.1)
-%doc %{_datadir}/gtk-doc/html/%{name}-libs-0.10/ 
+%doc %{_datadir}/gtk-doc/html/%{name}-libs-%{gstapi}/ 
 %doc %{_datadir}/gtk-doc/html/%{name}-plugins-%{api}/
 %{_includedir}/%{name}-%{api}/
-%{_datadir}/gir-1.0/Farstream-%{girmajor}.gir
+%{_datadir}/gir-1.0/Farstream-%{api}.gir
 %{_libdir}/pkgconfig/%{name}-%{api}.pc
 %{_libdir}/lib%{name}-%{api}.so
-
-%files -n %{girname}
-%{_libdir}/girepository-1.0/Farstream-%{girmajor}.typelib
-
-
-%changelog
-* Wed Oct 24 2012 Arkady L. Shane <ashejn@rosalab.ru> 0.1.2-4
-- add patch from upstream git to fix build
-
-* Wed May 02 2012 Alexander Khrukin <akhrukin@mandriva.org> 0.1.2-2mdv2012.0
-+ Revision: 795207
-- rel bump
-
-* Wed May 02 2012 Alexander Khrukin <akhrukin@mandriva.org> 0.1.2-1
-+ Revision: 795067
-- imported package farstream
 
