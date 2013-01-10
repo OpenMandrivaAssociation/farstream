@@ -8,10 +8,10 @@
 Summary:	An audio/video communications framework
 Name:		farstream
 Version:	0.2.2
-Release:	1
+Release:	2
 License:	LGPLv2+
-URL:		http://www.freedesktop.org/wiki/Software/Farstream
 Group:		Networking/Instant messaging
+URL:		http://www.freedesktop.org/wiki/Software/Farstream
 Source0:  	http://freedesktop.org/software/farstream/releases/%{name}/%{name}-%{version}.tar.gz
 Source1:  	http://freedesktop.org/software/farstream/releases/%{name}/%{name}-%{version}.tar.gz.asc
 
@@ -49,9 +49,8 @@ GObject Introspection interface description for %{name}.
 %package -n	gstreamer%{gstapi}-%{name}
 Summary:	Set of plugins for GStreamer used Audio/Video conferencing
 Group:		Sound
-Requires:	%{libname} = %{version}-%{release}
 Requires:	gstreamer%{gstapi}-plugins-good
-Requires:	gstreamer%{gstapi}-nice >= 0.1.0
+Requires:	gstreamer%{gstapi}-nice
 Requires:	gstreamer%{gstapi}-voip
 
 %description -n gstreamer%{gstapi}-%{name}
