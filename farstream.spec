@@ -1,19 +1,19 @@
-%define gstapi	1.0
-%define major	2
-%define api	0.2
-%define libname	%mklibname %{name} %{api} %{major}
-%define girname	%mklibname %{name}-gir %{api}
-%define devname	%mklibname -d %{name}
+%define gstapi 1.0
+%define major 2
+%define api 0.2
+%define libname %mklibname %{name} %{api} %{major}
+%define girname %mklibname %{name}-gir %{api}
+%define devname %mklibname -d %{name}
 
 Summary:	An audio/video communications framework
 Name:		farstream
 Version:	0.2.2
-Release:	2
+Release:	3
 License:	LGPLv2+
 Group:		Networking/Instant messaging
 URL:		http://www.freedesktop.org/wiki/Software/Farstream
-Source0:  	http://freedesktop.org/software/farstream/releases/%{name}/%{name}-%{version}.tar.gz
-Source1:  	http://freedesktop.org/software/farstream/releases/%{name}/%{name}-%{version}.tar.gz.asc
+Source0:	http://freedesktop.org/software/farstream/releases/%{name}/%{name}-%{version}.tar.gz
+Source1:	http://freedesktop.org/software/farstream/releases/%{name}/%{name}-%{version}.tar.gz.asc
 
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(gstreamer-%{gstapi})
@@ -34,7 +34,7 @@ streaming and NAT traversal issues.
 %package -n %{libname}
 Summary:	Farstream library
 Group:		System/Libraries
-Provides: 	%{name} = %{version}-%{release}
+Provides:	%{name} = %{version}-%{release}
 
 %description -n %{libname}
 Shared libraries for %{name}.
