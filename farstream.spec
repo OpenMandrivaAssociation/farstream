@@ -1,9 +1,9 @@
-%define gstapi 1.0
-%define major 2
-%define api 0.2
-%define libname %mklibname %{name} %{api} %{major}
-%define girname %mklibname %{name}-gir %{api}
-%define devname %mklibname -d %{name}
+%define gstapi	1.0
+%define api	0.2
+%define major	2
+%define libname	%mklibname %{name} %{api} %{major}
+%define girname	%mklibname %{name}-gir %{api}
+%define devname	%mklibname -d %{name}
 
 Summary:	An audio/video communications framework
 Name:		farstream
@@ -11,7 +11,7 @@ Version:	0.2.2
 Release:	3
 License:	LGPLv2+
 Group:		Networking/Instant messaging
-URL:		http://www.freedesktop.org/wiki/Software/Farstream
+Url:		http://www.freedesktop.org/wiki/Software/Farstream
 Source0:	http://freedesktop.org/software/farstream/releases/%{name}/%{name}-%{version}.tar.gz
 Source1:	http://freedesktop.org/software/farstream/releases/%{name}/%{name}-%{version}.tar.gz.asc
 
@@ -82,8 +82,6 @@ Headers of %{name} for development.
 
 %install
 %makeinstall_std
-
-find %{buildroot} -name '*.la' -delete
 
 %files -n %{libname}
 %{_libdir}/lib%{name}-%{api}.so.%{major}*
