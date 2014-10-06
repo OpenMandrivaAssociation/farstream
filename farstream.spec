@@ -7,8 +7,8 @@
 
 Summary:	An audio/video communications framework
 Name:		farstream
-Version:	0.2.2
-Release:	9
+Version:	0.2.4
+Release:	1
 License:	LGPLv2+
 Group:		Networking/Instant messaging
 Url:		http://www.freedesktop.org/wiki/Software/Farstream
@@ -72,7 +72,7 @@ Headers of %{name} for development.
 %apply_patches
 
 %build
-%configure2_5x \
+%configure \
 	--disable-static \
 	--enable-gupnp \
 	--with-package-name="%{_vendor} %{name}" \

@@ -1,2 +1,4 @@
+removed_sources:
+  farstream-0.1.2.tar.gz: e0b9519bd334305fa3b406e4f6e6d5ed262b63aa
 sources:
-  "farstream-0.1.2.tar.gz": e0b9519bd334305fa3b406e4f6e6d5ed262b63aa
+  farstream-0.2.4.tar.gz: d3455f2ed63a4eb9b41357982046cbeb8abdab8a
