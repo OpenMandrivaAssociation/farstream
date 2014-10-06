@@ -98,7 +98,7 @@ Headers of %{name} for development.
 
 %files -n %{devname}
 %doc ChangeLog
-%doc %{_datadir}/gtk-doc/html/%{name}-libs-%{gstapi}/ 
+%doc %{_datadir}/gtk-doc/html/%{name}-libs-%{api}/ 
 %doc %{_datadir}/gtk-doc/html/%{name}-plugins-%{api}/
 %{_includedir}/%{name}-%{api}/
 %{_datadir}/gir-1.0/Farstream-%{api}.gir
