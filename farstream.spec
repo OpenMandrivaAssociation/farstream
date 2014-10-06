@@ -51,7 +51,6 @@ Summary:	Set of plugins for GStreamer used Audio/Video conferencing
 Group:		Sound
 Requires:	gstreamer%{gstapi}-plugins-good
 Requires:	gstreamer%{gstapi}-nice
-Requires:	gstreamer%{gstapi}-voip
 
 %description -n gstreamer%{gstapi}-%{name}
 This is a set of plugins for GStreamer that will be used by Farstream
