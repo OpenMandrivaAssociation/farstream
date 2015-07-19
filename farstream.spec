@@ -8,7 +8,7 @@
 Summary:	An audio/video communications framework
 Name:		farstream
 Version:	0.2.4
-Release:	2
+Release:	3
 License:	LGPLv2+
 Group:		Networking/Instant messaging
 Url:		http://www.freedesktop.org/wiki/Software/Farstream
