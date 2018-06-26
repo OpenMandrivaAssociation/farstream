@@ -1,14 +1,14 @@
 %define gstapi	1.0
 %define api	0.2
-%define major	2
+%define major	5
 %define libname	%mklibname %{name} %{api} %{major}
 %define girname	%mklibname %{name}-gir %{api}
 %define devname	%mklibname -d %{name}
 
 Summary:	An audio/video communications framework
 Name:		farstream
-Version:	0.2.4
-Release:	4
+Version:	0.2.8
+Release:	1
 License:	LGPLv2+
 Group:		Networking/Instant messaging
 Url:		http://www.freedesktop.org/wiki/Software/Farstream
