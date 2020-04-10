@@ -7,8 +7,8 @@
 
 Summary:	An audio/video communications framework
 Name:		farstream
-Version:	0.2.8
-Release:	3
+Version:	0.2.9
+Release:	1
 License:	LGPLv2+
 Group:		Networking/Instant messaging
 Url:		http://www.freedesktop.org/wiki/Software/Farstream
@@ -77,10 +77,14 @@ Headers of %{name} for development.
 	--with-package-name="%{_vendor} %{name}" \
 	--with-package-origin="http://openmandriva.org"
 
-%make
+if ! %make_build; then
+	# *****ing g*** code generators are broken like everything g***...
+	sed -i -e 's,\\#,#,g' farstream/fs-enumtypes.c
+	make
+fi
 
 %install
-%makeinstall_std
+%make_install
 
 %files -n %{libname}
 %{_libdir}/lib%{name}-%{api}.so.%{major}*
