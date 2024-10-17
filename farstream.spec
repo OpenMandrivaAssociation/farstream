@@ -11,7 +11,7 @@ Version:	0.2.9
 Release:	2
 License:	LGPLv2+
 Group:		Networking/Instant messaging
-Url:		http://www.freedesktop.org/wiki/Software/Farstream
+Url:		https://www.freedesktop.org/wiki/Software/Farstream
 Source0:	http://freedesktop.org/software/farstream/releases/%{name}/%{name}-%{version}.tar.gz
 Source1:	http://freedesktop.org/software/farstream/releases/%{name}/%{name}-%{version}.tar.gz.asc
 
