@@ -15,6 +15,11 @@ Url:		https://www.freedesktop.org/wiki/Software/Farstream
 Source0:	http://freedesktop.org/software/farstream/releases/%{name}/%{name}-%{version}.tar.gz
 Source1:	http://freedesktop.org/software/farstream/releases/%{name}/%{name}-%{version}.tar.gz.asc
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(gstreamer-%{gstapi})
 BuildRequires:	pkgconfig(gstreamer-plugins-base-%{gstapi})
