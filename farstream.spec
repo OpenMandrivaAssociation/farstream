@@ -73,8 +73,9 @@ Provides:	%{name}-devel = %{version}-%{release}
 Headers of %{name} for development.
 
 %prep
-%setup -q
-%autopatch -p1
+%autosetup -p1
+# Allow gupnp-igd 1.6
+sed -i 's|gupnp-igd-1.0|gupnp-igd-1.6|g' configure*
 
 %build
 %configure \
