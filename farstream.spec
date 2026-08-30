@@ -24,6 +24,7 @@ BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(gstreamer-%{gstapi})
 BuildRequires:	pkgconfig(gstreamer-plugins-base-%{gstapi})
 BuildRequires:	pkgconfig(nice)
+BuildRequires:	pkgconfig(gupnp-igd-1.6)
 
 %description
 The Farstream (formerly Farsight) project is an effort to create a framework to
